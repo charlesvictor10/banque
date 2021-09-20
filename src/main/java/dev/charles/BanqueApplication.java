@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 
 import dev.charles.dao.ClientRepository;
@@ -19,7 +21,7 @@ import dev.charles.entities.Retrait;
 import dev.charles.entities.Versement;
 
 @SpringBootApplication
-public class BanqueApplication implements CommandLineRunner {
+public class BanqueApplication extends SpringBootServletInitializer {
 	@Autowired
 	private ClientRepository clientRepository;
 	@Autowired
@@ -31,7 +33,7 @@ public class BanqueApplication implements CommandLineRunner {
 		SpringApplication.run(BanqueApplication.class, args);
 	}
 
-	@Override
+	/*@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		Client c1 = clientRepository.save(new Client("Abdoulaye Dia", "layedia07@gmail.com"));
@@ -49,6 +51,10 @@ public class BanqueApplication implements CommandLineRunner {
 		operationRepository.save(new Versement(new Date(), 30000, cp2));
 		operationRepository.save(new Versement(new Date(), 80000, cp2));
 		operationRepository.save(new Retrait(new Date(), 4000, cp2));
+	}*/
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(BanqueApplication.class);
 	}
 }
 
